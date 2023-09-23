@@ -63,7 +63,7 @@ class LDaCA:
         self.token = token
         self.crate = None
         self.collection_type = None
-        self.collection_members = []
+        self.collection_members = None
         self.text_files = []
         self.collection = None
         self._membership = []
@@ -163,22 +163,42 @@ class LDaCA:
         with open(self.data_dir + '/ro-crate-metadata.json', 'w', encoding='utf-8') as f:
             json.dump(metadata, f, ensure_ascii=False, indent=4)
 
-    def retrieve_members_of_collection(self):
+   # def retrieve_members_of_collection(self):
         """
         Retrieves the members of the collection sending conformsTo and memberOf to find out if there are sub collections
         :return:
         """
-        params = dict()
-        params['conformsTo'] = self.collection_type
-        params['memberOf'] = self.collection
-        response = requests.get(self.url + '/object', params=params)
-        request_url = response.request.url
-        logging.debug(request_url)
-        conforms = response.json()
-        if conforms['total'] > 0:
-            self.set_collection_members(conforms['data'])
-        else:
-            logging.info(f"This collection {self.collection} does not have members")
+        # params = dict()
+        # params['conformsTo'] = self.collection_type
+        # params['memberOf'] = self.collection
+        # response = requests.get(self.url + '/object', params=params)
+        # request_url = response.request.url
+        # logging.debug(request_url)
+        # conforms = response.json()
+        # if conforms['total'] > 0:
+        #     self.set_collection_members(conforms['data'])
+        # else:
+        #     logging.info(f"This collection {self.collection} does not have members")
+
+        def retrieve_members_of_collection(self):
+            """
+            Retrieves the members of the collection sending conformsTo and memberOf to find out if there are sub collections
+            :return: List of collection members
+            """
+            params = dict()
+            params['conformsTo'] = self.collection_type
+            params['memberOf'] = self.collection
+            response = requests.get(self.url + '/object', params=params)
+            request_url = response.request.url
+            logging.debug(request_url)
+            conforms = response.json()
+            if conforms['total'] > 0:
+                collection_members = conforms['data']
+            else:
+                logging.info(f"This collection {self.collection} does not have members")
+                collection_members = []  # Initialize as an empty list
+
+            return collection_members
 
     def store_data(self, entity_type: str, extension: str, ldaca_files: str = None, sub_collection: str = None,
                    file_picker=None):

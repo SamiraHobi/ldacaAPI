@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Documents/UZH/MA-Thesis/Ldaca_create_corpus/.idea/Ldaca_create_corpus.iml" filepath="$USER_HOME$/Documents/UZH/MA-Thesis/Ldaca_create_corpus/.idea/Ldaca_create_corpus.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ldacaAPI.iml" filepath="$PROJECT_DIR$/.idea/ldacaAPI.iml" />
     </modules>
   </component>

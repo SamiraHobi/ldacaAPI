@@ -63,7 +63,7 @@ class LDaCA:
         self.token = token
         self.crate = None
         self.collection_type = None
-        self.collection_members = None
+        self.collection_members = []
         self.text_files = []
         self.collection = None
         self._membership = []
